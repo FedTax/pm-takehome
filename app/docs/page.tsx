@@ -6,6 +6,7 @@ import { supportedStates } from "@/lib/rates";
 const sections = [
   { id: "overview", label: "Overview" },
   { id: "concepts", label: "Core concepts" },
+  { id: "workflow", label: "Workflow" },
   { id: "auth", label: "Authentication" },
   { id: "merchants", label: "Merchants" },
   { id: "collection", label: "Collection settings" },
@@ -59,11 +60,11 @@ export default function DocsPage() {
             <strong>collects</strong> in, and <strong>calculate</strong> the exact tax for every sale.
           </p>
           <p className="text-gray-600">
-            New here? The fastest path is the three-call{" "}
-            <Link href="/" className="text-brand-600 underline">
-              quick start
-            </Link>
-            .
+            New here? Jump to the{" "}
+            <a href="#workflow" className="text-brand-600 underline">
+              workflow
+            </a>{" "}
+            for the three calls that get you from zero to a tax calculation.
           </p>
         </Doc>
 
@@ -88,13 +89,77 @@ export default function DocsPage() {
           </div>
         </Doc>
 
+        <Doc id="workflow" title="Workflow">
+          <p className="text-gray-600">
+            A full integration is three calls. Steps 1 and 2 you do once to set a merchant up; step 3
+            you call on every sale.
+          </p>
+
+          <h4 className="font-semibold text-ink mt-6 mb-2">1. Create a merchant</h4>
+          <p className="text-gray-600 text-sm">Add one of your sellers. You get back an id to use in the next steps.</p>
+          <CodeBlock label="terminal" lang="bash">{`curl -X POST http://localhost:3000/api/merchants \\
+  -H "Authorization: Bearer ${DEMO_API_KEY}" \\
+  -H "Content-Type: application/json" \\
+  -d '{"name":"Acme Roasters","address":{"state":"CA"}}'
+# -> { "id": "mch_ab12cd34", "collecting": [], ... }`}</CodeBlock>
+
+          <h4 className="font-semibold text-ink mt-6 mb-2">2. Turn on the states they collect in</h4>
+          <p className="text-gray-600 text-sm">
+            Flip on each state where the merchant is registered. Repeat per state.
+          </p>
+          <CodeBlock label="terminal" lang="bash">{`curl -X PUT http://localhost:3000/api/merchants/mch_ab12cd34/states/CA \\
+  -H "Authorization: Bearer ${DEMO_API_KEY}" \\
+  -H "Content-Type: application/json" \\
+  -d '{"collecting":true}'`}</CodeBlock>
+
+          <h4 className="font-semibold text-ink mt-6 mb-2">3. Calculate tax on each sale</h4>
+          <p className="text-gray-600 text-sm">Send the merchant and the ship-to address; get the tax back.</p>
+          <CodeBlock label="terminal" lang="bash">{`curl -X POST http://localhost:3000/api/tax/calculate \\
+  -H "Authorization: Bearer ${DEMO_API_KEY}" \\
+  -H "Content-Type: application/json" \\
+  -d '{"merchant_id":"mch_ab12cd34","amount":100,"ship_to":{"state":"CA"}}'`}</CodeBlock>
+          <CodeBlock label="200 OK" lang="json">{`{
+  "collecting": true,
+  "rate": { "combined_rate": 0.0875 },
+  "tax_amount": 8.75,
+  "total": 108.75
+}`}</CodeBlock>
+
+          <h4 className="font-semibold text-ink mt-8 mb-2">Expected behavior</h4>
+          <ul className="space-y-2 text-sm text-gray-600 list-disc list-inside">
+            <li>
+              Tax is charged only in states the merchant has turned on. Everywhere else,{" "}
+              <span className="font-mono text-xs">tax_amount</span> is 0 and{" "}
+              <span className="font-mono text-xs">collecting</span> is false.
+            </li>
+            <li>
+              <span className="font-mono text-xs">calculate</span> reads the merchant&#39;s current
+              collection settings at call time, so turning a state on or off changes results
+              immediately — no re-registration step.
+            </li>
+            <li>
+              Turning a state on is idempotent: PUT-ing the same state again is a no-op. Turn it off
+              with DELETE, or PUT <span className="font-mono text-xs">{`{ "collecting": false }`}</span>.
+            </li>
+            <li>Deleting a merchant also removes its collection settings.</li>
+            <li>
+              <span className="font-mono text-xs">combined_rate</span> is the sum of the state, county,
+              city, and special-district parts.
+            </li>
+            <li>
+              Errors are explicit: an unknown merchant returns 404, and a missing or unsupported state
+              returns 400. See <a href="#errors" className="text-brand-600 underline">Errors</a>.
+            </li>
+          </ul>
+        </Doc>
+
         <Doc id="auth" title="Authentication">
           <p className="text-gray-600">
             Every request must include your API key as a Bearer token in the{" "}
             <span className="font-mono text-sm">Authorization</span> header. Requests without a valid key
             get a <span className="font-mono text-sm">401</span>.
           </p>
-          <CodeBlock label="header">{`Authorization: Bearer ${DEMO_API_KEY}`}</CodeBlock>
+          <CodeBlock label="header" lang="http">{`Authorization: Bearer ${DEMO_API_KEY}`}</CodeBlock>
         </Doc>
 
         <Doc id="merchants" title="Merchants">
@@ -102,13 +167,13 @@ export default function DocsPage() {
 
           <Endpoint method="GET" path="/api/merchants" desc="List all merchants." />
           <Endpoint method="POST" path="/api/merchants" desc="Create a merchant. Only name is required.">
-            <CodeBlock label="request body">{`{
+            <CodeBlock label="request body" lang="json">{`{
   "name": "Acme Roasters",
   "email": "ap@acme.example",
   "address": { "line1": "1 Main St", "city": "Denver", "state": "CO", "zip": "80202" },
   "collecting": ["CO"]
 }`}</CodeBlock>
-            <CodeBlock label="201 Created">{`{
+            <CodeBlock label="201 Created" lang="json">{`{
   "id": "mch_ab12cd34",
   "name": "Acme Roasters",
   "email": "ap@acme.example",
@@ -138,7 +203,7 @@ export default function DocsPage() {
             path="/api/merchants/:id/states"
             desc="List all states with an on/off flag for this merchant."
           >
-            <CodeBlock label="200 OK">{`{
+            <CodeBlock label="200 OK" lang="json">{`{
   "object": "list",
   "merchant_id": "mch_ab12cd34",
   "collecting_count": 1,
@@ -160,7 +225,7 @@ export default function DocsPage() {
             path="/api/merchants/:id/states/:state"
             desc="Turn a state on or off. Body { collecting: true | false }. No body defaults to on."
           >
-            <CodeBlock label="request body">{`{ "collecting": true }`}</CodeBlock>
+            <CodeBlock label="request body" lang="json">{`{ "collecting": true }`}</CodeBlock>
           </Endpoint>
           <Endpoint
             method="DELETE"
@@ -178,13 +243,13 @@ export default function DocsPage() {
           </p>
 
           <Endpoint method="POST" path="/api/tax/calculate" desc="Calculate tax for one sale.">
-            <CodeBlock label="request body">{`{
+            <CodeBlock label="request body" lang="json">{`{
   "merchant_id": "mch_ab12cd34",
   "amount": 100.00,
   "currency": "USD",
   "ship_to": { "state": "CO" }
 }`}</CodeBlock>
-            <CodeBlock label="200 OK">{`{
+            <CodeBlock label="200 OK" lang="json">{`{
   "object": "tax_calculation",
   "merchant_id": "mch_ab12cd34",
   "ship_to_state": "CO",
@@ -212,7 +277,7 @@ export default function DocsPage() {
             reference. For real sales, prefer <span className="font-mono text-sm">/api/tax/calculate</span>.
           </p>
           <Endpoint method="POST" path="/api/rates" desc="Return the rate breakdown for an address's state.">
-            <CodeBlock label="request body">{`{ "address": { "state": "CA" } }`}</CodeBlock>
+            <CodeBlock label="request body" lang="json">{`{ "address": { "state": "CA" } }`}</CodeBlock>
           </Endpoint>
           <p className="text-gray-600">
             Rate data covers all {supportedStates().length} states and DC. Rates are illustrative demo

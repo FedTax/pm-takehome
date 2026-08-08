@@ -16,7 +16,9 @@
  */
 import "server-only";
 import { isSupportedState, supportedStates } from "./rates";
-import { DEMO_MERCHANT_ID } from "./demo";
+
+/** Fixed id for the seeded demo merchant, referenced by the docs and README. */
+const DEMO_MERCHANT_ID = "mch_demo_coffee";
 
 export interface Address {
   line1: string | null;

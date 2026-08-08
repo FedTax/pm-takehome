@@ -57,7 +57,7 @@ Seeded demo merchant: `mch_demo_coffee` (collects in CA, NY, WA).
 - `lib/plans.ts` — plan + trial definitions. **(Goal 1)**
 - `app/pricing/page.tsx` — pricing + trial. **(Goal 1)**
 - `app/dashboard/page.tsx` — dev console: onboarding stub **(Goal 2)** + trial card **(Goal 1)** + merchants.
-- `app/components/LiveDemo.tsx`, `app/page.tsx` — landing page + live calculate demo.
+- `app/page.tsx` — landing page (hero + concepts).
 - `lib/session.ts`, `lib/auth.ts`, `lib/apiAuth.ts` — cookie session, password, API-key check.
 
 Search the codebase for `📌 GOAL` to find the exact starting points.

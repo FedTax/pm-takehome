@@ -125,8 +125,8 @@ curl -X POST http://localhost:3000/api/tax/calculate \
 
 | Page | Path | What it is |
 | --- | --- | --- |
-| Landing | `/` | Hero, a concepts explainer, a live calculate demo, and a quick-start guide. |
-| API Docs | `/docs` | Reference for every endpoint, with a "core concepts" section. |
+| Landing | `/` | Hero and a concepts explainer. |
+| API Docs | `/docs` | Concepts, a common-workflow guide, and a reference for every endpoint. |
 | Pricing | `/pricing` | Two paid plans (Basic $20/mo, Premium $100/mo) + the trial. **Goal 1 touches here.** |
 | Login | `/login` | Hardcoded-password sign-in. |
 | Dashboard | `/dashboard` | Dev console: onboarding stub **(Goal 2)**, trial card **(Goal 1)**, API key, merchants. |
@@ -146,8 +146,8 @@ curl -X POST http://localhost:3000/api/tax/calculate \
 
 ```
 app/
-  page.tsx                    Landing page (concepts, demo, quick start)
-  docs/page.tsx               API reference + concepts
+  page.tsx                    Landing page (hero + concepts)
+  docs/page.tsx               API reference + concepts + workflow
   pricing/page.tsx            Pricing + trial          ← Goal 1
   login/page.tsx              Login screen
   dashboard/page.tsx          Dev console              ← Goal 2 stub + Goal 1 trial card
@@ -155,8 +155,6 @@ app/
   api/tax/calculate/route.ts  The calculation endpoint
   api/rates/route.ts          Rate lookup utility
   api/login|logout/           Session cookies
-  components/
-    LiveDemo.tsx              Landing-page live calculate demo
 lib/
   store.ts                    In-memory merchants + collection store (seeded)
   rates.ts                    Hardcoded rate data, all 50 states + DC
