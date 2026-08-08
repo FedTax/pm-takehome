@@ -12,6 +12,11 @@ drive it to build the *how*.
 There is no single right answer. We're evaluating product judgment, how you scope under a time
 limit, and how well you use AI to turn an idea into something real.
 
+**Deliverable:** a screen-recorded video demo, **5 minutes or less**, walking through both
+prototypes. We do not review code. Keep it a quick overview — the detailed walkthrough of your
+decisions happens live in the next interview. Full details in the
+[README](../README.md#6-submitting).
+
 ---
 
 ## The product, in one minute
@@ -26,8 +31,9 @@ The API gives a platform three things:
 - **Calculation** — for a sale, send a merchant + a ship-to address and get the tax back
   (`/api/tax/calculate`). It returns $0 in states the merchant has not turned on.
 
-Read `/docs` in the running app and try the live demo on the landing page to feel how it fits
-together. There is a seeded merchant, `mch_demo_coffee`, that collects in CA, NY, and WA.
+Read `/docs` in the running app (the Workflow section walks the three calls end to end) and try
+the endpoints yourself to feel how it fits together. There is a seeded merchant,
+`mch_demo_coffee`, that collects in CA, NY, and WA.
 
 ---
 
@@ -40,7 +46,7 @@ Today every new account starts a **30-day free trial of Basic** ($20/mo). When i
 platform must pick a paid plan (Basic $20, Premium $100) to keep calling the API. You can see
 this on `/pricing` and `/dashboard`.
 
-**Think through (and cover in your write-up):**
+**Think through (touch on it in the demo, and be ready to go deeper in the interview):**
 - What's *in* the free tier vs. Basic vs. Premium? Where's the line that makes free genuinely
   useful but creates a real reason to upgrade? (Number of merchants? Calculations per month?
   States? Support?)
@@ -68,7 +74,7 @@ For this platform API, the "aha" is roughly: *"I created a merchant, turned on a
 calculation, and got real tax back — and I can see it would be $0 if I hadn't turned that state
 on."* Your onboarding should make a developer feel that as fast as possible.
 
-**Think through (and cover in your write-up):**
+**Think through (touch on it in the demo, and be ready to go deeper in the interview):**
 - What is the shortest credible path to that first calculation? What is the very first step?
 - Where should onboarding live and what form should it take — a guided checklist, an
   interactive setup wizard, copy-paste code that runs against live results, seeded example data,
@@ -95,7 +101,7 @@ free to replace it entirely.
 | **Scoping** | You did the *right* 3–4 hours of work, not the most. |
 | **User empathy** | You designed for the developer integrating this API, not for yourself. |
 | **Driving AI** | You got Claude Code to build what you intended, and caught it when it drifted. |
-| **Communication** | Your write-up makes the "why" obvious and honest about tradeoffs. |
+| **Communication** | Your demo makes the "why" obvious and is honest about tradeoffs. |
 
 ## What we are NOT evaluating
 
@@ -105,18 +111,6 @@ free to replace it entirely.
 - Whether you personally wrote any code. Using AI fully is the point.
 
 ---
-
-## Tips for working with Claude Code
-
-- Start by asking it to give you a tour: *"Explain how this app is structured, and walk me
-  through the merchant / collection / calculate model."* Understand before you change.
-- Work in small steps and look at the result in the browser after each one.
-- Be specific about product intent, not just mechanics: *"Onboarding should get a developer to
-  their first successful calculation in under two minutes, and make the $0-when-not-collecting
-  behavior impossible to miss."*
-- When it goes the wrong direction, say so and steer. That back-and-forth is exactly the skill
-  we're interested in.
-- Keep notes as you go — they'll make the write-up easy.
 
 Questions about setup only: email your hiring contact. Questions about the product decisions:
 those are yours to make. Have fun.

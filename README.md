@@ -29,8 +29,9 @@ first. In short:
    collect in, and see a real tax calculation come back. What should that first-run experience
    look and feel like?
 
-We care more about product judgment and how you use AI than about polished code. A short
-write-up of your decisions matters as much as the working prototype.
+We care more about product judgment and how you use AI than about polished code. In fact, we
+won't look at your code at all — you'll show us your work in a short video demo (see
+[§6 Submitting](#6-submitting)).
 
 ---
 
@@ -191,16 +192,24 @@ edits) or, fully hands-off, `claude --permission-mode bypassPermissions`. Only u
 
 ## 6. Submitting
 
-Please send back:
+**Send us one thing: a screen-recorded video demo, 5 minutes or less.** We do not need your
+code — we won't review it. Just record your screen and walk us through what you built.
 
-1. **The code** (a zip, a fork, or a branch — whatever's easy).
-2. **A short write-up** (1–2 pages, or a Loom, your call) covering:
-   - Your freemium design and the reasoning behind it.
-   - Your onboarding experience and why it is the fastest path to a developer's "aha".
-   - What you'd do next with more time, and anything you'd validate with data.
+Cover both prototypes:
 
-Timebox it to **~3–4 hours**. We're not looking for finished, shippable features — we're
-looking at how you scope, decide, and drive an AI agent toward a good product outcome. If you
-get stuck on setup, email your contact; setup problems won't count against you.
+1. **Pricing changes** — your freemium / Free tier, and how it shows up.
+2. **Developer onboarding** — the onboarding experience you built.
+
+Keep it to a **quick overview**: show the highlights and the reasoning in a sentence or two,
+not a line-by-line tour. We'll go deep together in the next interview — that is where you'll
+walk through your decisions and tradeoffs in detail, so no need to cram it all into the video.
+
+**How to send it:** a shareable link is easiest — [Loom](https://www.loom.com) (free, records
+your screen in one click), Google Drive, or any link we can open. Send it to your hiring
+contact.
+
+Timebox the work itself to **~3–4 hours**. We're not looking for finished, shippable features —
+we're looking at how you scope, decide, and drive an AI agent toward a good product outcome. If
+you get stuck on setup, email your contact; setup problems won't count against you.
 
 Good luck, and have fun with it.
