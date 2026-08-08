@@ -1,9 +1,14 @@
 # TaxRate — PM Take-Home
 
 Welcome, and thanks for taking the time. This is a small but real full-stack app: a
-**sales tax rate lookup API** with a marketing site, docs, pricing, and a logged-in
+**sales tax API for platforms** with a marketing site, docs, pricing, and a logged-in
 dashboard. Your job is to extend it using **Claude Code** (an AI coding agent), the same
 way you would prototype with engineering in the role.
+
+The product: a "platform" (think a storefront builder or marketplace) has business customers
+called **merchants**. The API lets the platform manage merchants, control which states each
+merchant collects sales tax in, and calculate the tax for any sale. See `/docs` in the running
+app for the full explainer.
 
 You do not need to be an engineer. You need to be able to describe what you want, drive an
 AI agent to build it, and make good product decisions along the way. The code is small and
@@ -19,9 +24,10 @@ first. In short:
 1. **Freemium.** Today every new account gets a 30-day *trial* of the Basic plan, then hits a
    paywall. Prototype replacing that trial with a permanent **Free tier**. Show what the
    experience looks and feels like, and explain *why* you designed it that way.
-2. **The "Aha" moment.** The landing page has a bare-bones "Try it live" widget. Turn it into an
-   **interactive experience** that gets a first-time visitor to the "I get it, I want this"
-   moment as fast as possible.
+2. **Developer onboarding.** Prototype an onboarding experience that gets a *developer* set up
+   and to the "aha" as fast as possible: create their first merchants, turn on the states they
+   collect in, and see a real tax calculation come back. What should that first-run experience
+   look and feel like?
 
 We care more about product judgment and how you use AI than about polished code. A short
 write-up of your decisions matters as much as the working prototype.
@@ -93,51 +99,70 @@ Open **http://localhost:3000**.
 | --- | --- |
 | Login password (at `/login`) | `letmein` |
 | Public demo API key | `demo_sk_taxrate_public` |
-| API endpoint | `POST /api/rates` |
+| Seeded demo merchant | `mch_demo_coffee` (collects in CA, NY, WA) |
 
 Both defaults can be changed via a `.env.local` file — see [`.env.example`](.env.example). You
 don't need to.
 
-Try the API directly:
+Try the API directly — calculate tax for the seeded merchant (collects in CA, so tax is
+charged; try `"state":"TX"` and it comes back $0 because that state is off):
 
 ```bash
-curl -X POST http://localhost:3000/api/rates \
+curl -X POST http://localhost:3000/api/tax/calculate \
   -H "Authorization: Bearer demo_sk_taxrate_public" \
   -H "Content-Type: application/json" \
-  -d '{"address":{"city":"San Francisco","state":"CA","zip":"94105"}}'
+  -d '{"merchant_id":"mch_demo_coffee","amount":100,"ship_to":{"state":"CA"}}'
 ```
+
+> The merchant store is in-memory: any merchants you create reset when you restart the dev
+> server. That is intentional — no database to set up.
 
 ---
 
 ## 4. What's in the app
 
+### Pages
+
 | Page | Path | What it is |
 | --- | --- | --- |
-| Landing | `/` | Hero, a "Try it live" widget, and a one-page quick-start guide. **Goal 2 lives here.** |
-| API Docs | `/docs` | Standard-looking reference for the one endpoint. |
+| Landing | `/` | Hero, a concepts explainer, a live calculate demo, and a quick-start guide. |
+| API Docs | `/docs` | Reference for every endpoint, with a "core concepts" section. |
 | Pricing | `/pricing` | Two paid plans (Basic $20/mo, Premium $100/mo) + the trial. **Goal 1 touches here.** |
 | Login | `/login` | Hardcoded-password sign-in. |
-| Dashboard | `/dashboard` | Post-login view: trial countdown, API key, usage. **Goal 1 shows up here.** |
-| The API | `POST /api/rates` | Send an address, get the sales tax rate breakdown for that state. |
+| Dashboard | `/dashboard` | Dev console: onboarding stub **(Goal 2)**, trial card **(Goal 1)**, API key, merchants. |
+
+### The API
+
+| Endpoint | What it does |
+| --- | --- |
+| `GET/POST /api/merchants` | List / create merchants (your platform's sellers). |
+| `GET/PATCH/DELETE /api/merchants/:id` | Retrieve / update / delete a merchant. |
+| `GET /api/merchants/:id/states` | List a merchant's per-state collection flags. |
+| `GET/PUT/DELETE /api/merchants/:id/states/:state` | Turn one state on/off for a merchant. |
+| `POST /api/tax/calculate` | Calculate tax for a sale (honors the merchant's collection settings). |
+| `POST /api/rates` | Stateless rate lookup utility (no merchant). |
 
 ### Where the code lives
 
 ```
 app/
-  page.tsx              Landing page (quick-start guide)
-  docs/page.tsx         API reference
-  pricing/page.tsx      Pricing + trial
-  login/page.tsx        Login screen
-  dashboard/page.tsx    Logged-in dashboard (trial state)
-  api/rates/route.ts    ← the product: the rate lookup endpoint
-  api/login|logout/     Session cookies
+  page.tsx                    Landing page (concepts, demo, quick start)
+  docs/page.tsx               API reference + concepts
+  pricing/page.tsx            Pricing + trial          ← Goal 1
+  login/page.tsx              Login screen
+  dashboard/page.tsx          Dev console              ← Goal 2 stub + Goal 1 trial card
+  api/merchants/...           Merchants + collection CRUD
+  api/tax/calculate/route.ts  The calculation endpoint
+  api/rates/route.ts          Rate lookup utility
+  api/login|logout/           Session cookies
   components/
-    ApiPlayground.tsx   ← Goal 2 starting point (the "Try it live" widget)
+    LiveDemo.tsx              Landing-page live calculate demo
 lib/
-  rates.ts              Hardcoded rate data by state ("the product" data)
-  plans.ts              ← Goal 1 starting point (plan / trial definitions)
-  session.ts            Trial-clock cookie logic
-  auth.ts               The hardcoded password
+  store.ts                    In-memory merchants + collection store (seeded)
+  rates.ts                    Hardcoded rate data, all 50 states + DC
+  plans.ts                    Plan / trial definitions ← Goal 1
+  session.ts                  Trial-clock cookie logic
+  auth.ts / apiAuth.ts        Password + API-key checks
 ```
 
 Search the code for **`📌 GOAL`** to jump straight to the spots each task starts from.
@@ -173,7 +198,7 @@ Please send back:
 1. **The code** (a zip, a fork, or a branch — whatever's easy).
 2. **A short write-up** (1–2 pages, or a Loom, your call) covering:
    - Your freemium design and the reasoning behind it.
-   - Your "aha" experience and why it's the fastest path to value.
+   - Your onboarding experience and why it is the fastest path to a developer's "aha".
    - What you'd do next with more time, and anything you'd validate with data.
 
 Timebox it to **~3–4 hours**. We're not looking for finished, shippable features — we're

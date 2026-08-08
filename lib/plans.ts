@@ -3,7 +3,7 @@
  *
  * Today the product has TWO paid plans (Basic, Premium) and every new account
  * starts on a 30-day free TRIAL of Basic. There is no free tier — when the
- * trial ends, the customer must pick a paid plan to keep using the API.
+ * trial ends, the platform must pick a paid plan to keep calling the API.
  *
  * ───────────────────────────────────────────────────────────────────────────
  * 📌 GOAL 1 (freemium) STARTS HERE.
@@ -23,8 +23,8 @@ export interface Plan {
   cadence: string;
   tagline: string;
   features: string[];
-  /** Requests per month included; null = unmetered for the demo. */
-  monthlyRequests: number | null;
+  /** Tax calculations included per month; null = unmetered for the demo. */
+  monthlyCalculations: number | null;
   /** Visually emphasize this plan on the pricing page. */
   highlighted?: boolean;
 }
@@ -35,14 +35,15 @@ export const PLANS: Plan[] = [
     name: "Basic",
     price: 20,
     cadence: "per month",
-    tagline: "For side projects and small stores.",
+    tagline: "For platforms just getting started.",
     features: [
-      "10,000 rate lookups / month",
+      "Up to 25 merchants",
+      "10,000 tax calculations / month",
       "All 50 states + DC",
       "REST API + JSON responses",
       "Email support",
     ],
-    monthlyRequests: 10_000,
+    monthlyCalculations: 10_000,
     highlighted: true,
   },
   {
@@ -50,15 +51,16 @@ export const PLANS: Plan[] = [
     name: "Premium",
     price: 100,
     cadence: "per month",
-    tagline: "For production apps and platforms.",
+    tagline: "For platforms running tax at scale.",
     features: [
-      "250,000 rate lookups / month",
+      "Unlimited merchants",
+      "250,000 tax calculations / month",
       "All 50 states + DC",
       "99.9% uptime SLA",
       "Priority support + Slack channel",
-      "Webhooks & bulk lookups",
+      "Webhooks & bulk calculations",
     ],
-    monthlyRequests: 250_000,
+    monthlyCalculations: 250_000,
   },
 ];
 
