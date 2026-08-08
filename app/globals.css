@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-white text-ink antialiased;
+}
+
+/* Simple, docs-style code block used across pages. */
+.code {
+  @apply font-mono text-sm leading-relaxed;
+}
