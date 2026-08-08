@@ -1,0 +1,26 @@
+{
+  "name": "TaxRate take-home (Node + Claude Code)",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+
+  // Install the app's dependencies and Claude Code once the container is built.
+  "postCreateCommand": "npm install && npm install -g @anthropic-ai/claude-code",
+
+  // Forward the Next.js dev server port so you can open the app in a browser.
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "TaxRate app" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "bradlc.vscode-tailwindcss"]
+    }
+  },
+
+  // Persist Claude Code's login/settings across container rebuilds.
+  "mounts": ["source=taxrate-claude-config,target=/home/node/.claude,type=volume"],
+  "remoteEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+  },
+  "remoteUser": "node"
+}

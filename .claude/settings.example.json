@@ -1,0 +1,9 @@
+{
+  "//": "TEMPLATE — copy this file to `.claude/settings.local.json` and fill in the values your hiring contact gives you. settings.local.json is gitignored so your key never gets committed. Delete the // comment lines after copying (JSON has no real comments).",
+  "//base_url": "The gateway endpoint you were given.",
+  "//auth_token": "The API key you were given. Use ANTHROPIC_AUTH_TOKEN for a Bearer-token gateway; if your contact says the key is an x-api-key, use ANTHROPIC_API_KEY instead.",
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://YOUR-GATEWAY-URL",
+    "ANTHROPIC_AUTH_TOKEN": "YOUR-PROVIDED-API-KEY"
+  }
+}
