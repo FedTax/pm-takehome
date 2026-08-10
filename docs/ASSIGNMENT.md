@@ -103,6 +103,10 @@ free to replace it entirely.
 | **Driving AI** | You got your coding agent to build what you intended, and caught it when it drifted. |
 | **Communication** | Your demo makes the "why" obvious and is honest about tradeoffs. |
 
+Since your coding tool runs through our gateway, we can see your AI session (the prompts you
+write and how you steer the agent) and we review it as part of the **Driving AI** dimension
+above. Just work the way you normally would.
+
 ## What we are NOT evaluating
 
 - Pixel-perfect design or clean code architecture.

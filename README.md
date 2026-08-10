@@ -56,6 +56,11 @@ account. Whatever tool you use, you are giving it the same two values:
 - **Base URL** — the gateway URL we send you.
 - **Auth** — the API key we send you (sent as a Bearer token).
 
+> **Please note:** because your tool routes through our gateway, your session there — the
+> prompts you write and how you steer the agent — is logged, and we review it as part of
+> assessing this take-home. How you drive AI is one of the things we're evaluating, so there's
+> nothing to do differently here — just work naturally.
+
 **Any tool (environment variables).** Most agentic coding tools read these standard variables.
 Set them before launching your tool from the repo:
 
