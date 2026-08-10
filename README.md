@@ -229,7 +229,7 @@ walk through your decisions and tradeoffs in detail, so no need to cram it all i
 your screen in one click), Google Drive, or any link we can open. Send it to your hiring
 contact.
 
-Timebox the work itself to **~3–4 hours**. We're not looking for finished, shippable features —
+Timebox the work itself to **~2–3 hours**. We're not looking for finished, shippable features —
 we're looking at how you scope, decide, and drive an AI agent toward a good product outcome. If
 you get stuck on setup, email your contact; setup problems won't count against you.
 

@@ -1,7 +1,7 @@
 # The Assignment
 
 **Role:** Product Manager, API & Platform
-**Timebox:** ~3–4 hours
+**Timebox:** ~2–3 hours
 **Tools:** This repo + an agentic coding tool of your choice (see the [README](../README.md) for setup)
 
 You've inherited **TaxRate**, a sales tax API for platforms, with a marketing site, docs,
@@ -98,7 +98,7 @@ free to replace it entirely.
 | We look for | What that means here |
 | --- | --- |
 | **Product judgment** | Sensible tier boundaries; an onboarding path that respects a developer's time. |
-| **Scoping** | You did the *right* 3–4 hours of work, not the most. |
+| **Scoping** | You did the *right* 2–3 hours of work, not the most. |
 | **User empathy** | You designed for the developer integrating this API, not for yourself. |
 | **Driving AI** | You got your coding agent to build what you intended, and caught it when it drifted. |
 | **Communication** | Your demo makes the "why" obvious and is honest about tradeoffs. |
