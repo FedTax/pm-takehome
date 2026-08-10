@@ -2,11 +2,11 @@
 
 **Role:** Product Manager, API & Platform
 **Timebox:** ~3–4 hours
-**Tools:** This repo + Claude Code (see the [README](../README.md) for setup)
+**Tools:** This repo + an agentic coding tool of your choice (see the [README](../README.md) for setup)
 
 You've inherited **TaxRate**, a sales tax API for platforms, with a marketing site, docs,
 pricing, and a dashboard. It works. Your job is to prototype two product improvements and
-explain your thinking. Treat Claude Code as your engineer: you decide *what* and *why*, and
+explain your thinking. Treat your coding agent as your engineer: you decide *what* and *why*, and
 drive it to build the *how*.
 
 There is no single right answer. We're evaluating product judgment, how you scope under a time
@@ -100,7 +100,7 @@ free to replace it entirely.
 | **Product judgment** | Sensible tier boundaries; an onboarding path that respects a developer's time. |
 | **Scoping** | You did the *right* 3–4 hours of work, not the most. |
 | **User empathy** | You designed for the developer integrating this API, not for yourself. |
-| **Driving AI** | You got Claude Code to build what you intended, and caught it when it drifted. |
+| **Driving AI** | You got your coding agent to build what you intended, and caught it when it drifted. |
 | **Communication** | Your demo makes the "why" obvious and is honest about tradeoffs. |
 
 ## What we are NOT evaluating

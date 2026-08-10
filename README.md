@@ -2,8 +2,9 @@
 
 Welcome, and thanks for taking the time. This is a small but real full-stack app: a
 **sales tax API for platforms** with a marketing site, docs, pricing, and a logged-in
-dashboard. Your job is to extend it using **Claude Code** (an AI coding agent), the same
-way you would prototype with engineering in the role.
+dashboard. Your job is to extend it using an **agentic coding tool** — Claude Code, or any
+other you like, as long as you can point it at our gateway ([§2](#2-point-your-coding-tool-at-our-gateway)).
+You will work the same way you would prototype with engineering in the role.
 
 The product: a "platform" (think a storefront builder or marketplace) has business customers
 called **merchants**. The API lets the platform manage merchants, control which states each
@@ -38,27 +39,44 @@ won't look at your code at all — you'll show us your work in a short video dem
 ## 1. Prerequisites
 
 - **Node.js 20+** and npm (check with `node --version`).
-- **Claude Code**. Install it globally:
-  ```bash
-  npm install -g @anthropic-ai/claude-code
-  ```
-  (Or follow the docs at https://docs.claude.com/en/docs/claude-code.) Prefer not to install
-  anything on your machine? See [§5 Sandbox](#5-optional-run-it-in-a-sandbox).
+- **An agentic coding tool of your choice.** Use whatever you are most productive in. The only
+  requirement is that you can point it at our gateway (see [§2](#2-point-your-coding-tool-at-our-gateway)).
+  If you do not have a preference, [Claude Code](https://docs.claude.com/en/docs/claude-code) is
+  a simple default — install it with `npm install -g @anthropic-ai/claude-code`. Prefer not to
+  install anything locally? See [§5 Sandbox](#5-optional-run-it-in-a-sandbox).
 
 ---
 
-## 2. Point Claude Code at our gateway
+## 2. Point your coding tool at our gateway
 
-We'll send you an **API key** separately. It routes Claude Code through our LLM gateway, so
-you don't need your own Anthropic account. Point Claude Code at it in **one** of these ways.
+We'll send you a **gateway URL** and an **API key** separately. The gateway is
+Anthropic-API-compatible and routes to the model for you, so you don't need your own Anthropic
+account. Whatever tool you use, you are giving it the same two values:
 
-**Option A — project settings file (recommended).** From the repo root:
+- **Base URL** — the gateway URL we send you.
+- **Auth** — the API key we send you (sent as a Bearer token).
+
+**Any tool (environment variables).** Most agentic coding tools read these standard variables.
+Set them before launching your tool from the repo:
+
+```bash
+export ANTHROPIC_BASE_URL="https://the-gateway-url-we-send-you"
+export ANTHROPIC_AUTH_TOKEN="the-api-key-we-send-you"
+```
+
+If your tool expects the key as an `x-api-key` header rather than a Bearer token, use
+`ANTHROPIC_API_KEY` in place of `ANTHROPIC_AUTH_TOKEN`. If your tool has its own settings UI for
+a custom Anthropic-compatible endpoint, enter the same base URL and key there — check your
+tool's docs for where.
+
+**Claude Code specifically.** The env vars above work, or you can use a project settings file:
 
 ```bash
 cp .claude/settings.example.json .claude/settings.local.json
 ```
 
-Then edit `.claude/settings.local.json` and fill in the two values we gave you:
+Then edit `.claude/settings.local.json` with the two values (it is gitignored, so your key
+never gets committed):
 
 ```json
 {
@@ -69,25 +87,20 @@ Then edit `.claude/settings.local.json` and fill in the two values we gave you:
 }
 ```
 
-`settings.local.json` is gitignored, so your key never gets committed. Use
-`ANTHROPIC_AUTH_TOKEN` for a Bearer-token key (the default); if we tell you the key is an
-`x-api-key`, rename it to `ANTHROPIC_API_KEY` instead.
-
-**Option B — environment variables.** Set them in your shell before running `claude`:
-
-```bash
-export ANTHROPIC_BASE_URL="https://the-gateway-url-we-send-you"
-export ANTHROPIC_AUTH_TOKEN="the-api-key-we-send-you"
-```
-
-**Verify it works.** Run `claude` from the repo, then type `/status`. You should see the
-gateway base URL listed. Send it a quick message ("say hello") to confirm it responds. If you
-get a 401, double-check the key and whether it should be `ANTHROPIC_AUTH_TOKEN` vs
-`ANTHROPIC_API_KEY`.
+**Verify it works.** Launch your tool and send a quick test prompt ("say hello"). If it
+responds, you're set. (In Claude Code, `/status` also shows the configured gateway URL.) A
+`401` means the key or header type is wrong — try `ANTHROPIC_API_KEY` vs `ANTHROPIC_AUTH_TOKEN`.
 
 ---
 
 ## 3. Run the app
+
+> **Recommended: let your AI tool set this up for you.** Once it's connected to the gateway
+> (§2), give it this prompt: *"Read `SETUP.md` and follow it to install dependencies and start
+> the app, then tell me the local URL and confirm it's working."* It will handle the steps below.
+>
+> Prefer to do it by hand, or want a step-by-step guide with troubleshooting? See
+> **[`SETUP.md`](SETUP.md)**. The short version:
 
 ```bash
 npm install
@@ -170,20 +183,23 @@ Search the code for **`📌 GOAL`** to jump straight to the spots each task star
 
 ## 5. (Optional) Run it in a sandbox
 
-If you'd rather not install Node or Claude Code on your own machine, this repo ships a
+If you'd rather not install Node or a coding tool on your own machine, this repo ships a
 **dev container** that sets everything up in an isolated environment.
 
 1. Install [Docker](https://www.docker.com/) and, in VS Code, the
    [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 2. Open this folder in VS Code and run **"Dev Containers: Reopen in Container"** from the
-   Command Palette. It installs the app's dependencies and Claude Code automatically.
-3. In the container terminal, do [§2](#2-point-claude-code-at-our-gateway) (settings file), then
-   `npm run dev`.
+   Command Palette. It installs the app's dependencies automatically, plus Claude Code as a
+   ready-to-go default. Prefer a different tool? Install it in the container the same way you
+   would locally.
+3. In the container terminal, point your tool at the gateway
+   ([§2](#2-point-your-coding-tool-at-our-gateway)), then run `npm run dev`.
 
-Because the container is isolated, you can safely let Claude Code work with fewer
-interruptions by starting it as `claude --permission-mode acceptEdits` (auto-approves file
-edits) or, fully hands-off, `claude --permission-mode bypassPermissions`. Only use
-`bypassPermissions` inside the container, never on your own machine.
+Because the container is isolated, you can safely let your tool run with fewer approval prompts.
+In Claude Code that is `claude --permission-mode acceptEdits` (auto-approves file edits) or,
+fully hands-off, `claude --permission-mode bypassPermissions` — only use `bypassPermissions`
+inside the container, never on your own machine. Other tools have their own auto-approve
+setting.
 
 > GitHub Codespaces works too: "Code → Create codespace" uses the same container config, so
 > you can do the whole exercise in the browser with nothing installed locally.
