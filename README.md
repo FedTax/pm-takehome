@@ -19,8 +19,8 @@ heavily commented so you can find your way around.
 
 ## What you'll build
 
-Two prototypes. The full brief is in **[`docs/ASSIGNMENT.md`](docs/ASSIGNMENT.md)** — read it
-first. In short:
+Two prototypes, plus a short plan. The full brief is in
+**[`docs/ASSIGNMENT.md`](docs/ASSIGNMENT.md)** — read it first. In short:
 
 1. **Freemium.** Today every new account gets a 30-day *trial* of the Basic plan, then hits a
    paywall. Prototype replacing that trial with a permanent **Free tier**. Show what the
@@ -29,10 +29,13 @@ first. In short:
    and to the "aha" as fast as possible: create their first merchants, turn on the states they
    collect in, and see a real tax calculation come back. What should that first-run experience
    look and feel like?
+3. **Customer-interview plan.** A one-pager for taking the onboarding to a real customer: the
+   goal of the interview and the questions you'd ask.
 
 We care more about product judgment and how you use AI than about polished code. In fact, we
 won't look at your code at all — you'll show us your work in a short video demo (see
-[§6 Submitting](#6-submitting)).
+[§6 Submitting](#6-submitting)). Use AI heavily, but the thinking, opinions, and taste need to
+be **yours** — leaning on it for everything without your own input is a failure.
 
 ---
 
@@ -213,21 +216,22 @@ setting.
 
 ## 6. Submitting
 
-**Send us one thing: a screen-recorded video demo, 5 minutes or less.** We do not need your
-code — we won't review it. Just record your screen and walk us through what you built.
+**Send us two things** (no code — we won't review it):
 
-Cover both prototypes:
+1. **A screen-recorded video demo, 5 minutes or less**, walking through both prototypes:
+   - **Pricing changes** — your freemium / Free tier, and how it shows up.
+   - **Developer onboarding** — the onboarding experience you built.
+2. **A one-page customer-interview plan** for the onboarding (Goal 3 in
+   [`docs/ASSIGNMENT.md`](docs/ASSIGNMENT.md)): the goal of the interview plus the questions you'd
+   ask. Any format is fine — PDF, doc, or a link.
 
-1. **Pricing changes** — your freemium / Free tier, and how it shows up.
-2. **Developer onboarding** — the onboarding experience you built.
+Keep the video a **quick overview**: show the highlights and the reasoning in a sentence or two,
+not a line-by-line tour. We'll go deep together in the next interview — that is where you'll walk
+through your decisions and tradeoffs in detail, so no need to cram it all into the video.
 
-Keep it to a **quick overview**: show the highlights and the reasoning in a sentence or two,
-not a line-by-line tour. We'll go deep together in the next interview — that is where you'll
-walk through your decisions and tradeoffs in detail, so no need to cram it all into the video.
-
-**How to send it:** a shareable link is easiest — [Loom](https://www.loom.com) (free, records
-your screen in one click), Google Drive, or any link we can open. Send it to your hiring
-contact.
+**How to send it:** shareable links are easiest — [Loom](https://www.loom.com) (free, records
+your screen in one click) for the video, and a Google Drive/doc link for the one-pager, or
+anything we can open. Send them to your hiring contact.
 
 Timebox the work itself to **~2–3 hours**. We're not looking for finished, shippable features —
 we're looking at how you scope, decide, and drive an AI agent toward a good product outcome. If

@@ -5,15 +5,19 @@
 **Tools:** This repo + an agentic coding tool of your choice (see the [README](../README.md) for setup)
 
 You've inherited **TaxRate**, a sales tax API for platforms, with a marketing site, docs,
-pricing, and a dashboard. It works. Your job is to prototype two product improvements and
-explain your thinking. Treat your coding agent as your engineer: you decide *what* and *why*, and
-drive it to build the *how*.
+pricing, and a dashboard. It works. Your job is to prototype two product improvements, then plan
+how you'd validate the onboarding with a real customer. Treat your coding agent as your engineer:
+you decide *what* and *why*, and drive it to build the *how*.
 
 There is no single right answer. We're evaluating product judgment, how you scope under a time
-limit, and how well you use AI to turn an idea into something real.
+limit, how well you use AI to turn an idea into something real, and how you'd learn from customers.
 
-**Deliverable:** a screen-recorded video demo, **5 minutes or less**, walking through both
-prototypes. We do not review code. Keep it a quick overview — the detailed walkthrough of your
+**Deliverables:** two things —
+1. A screen-recorded **video demo, 5 minutes or less**, walking through both prototypes
+   (Goals 1 and 2).
+2. A **one-page customer-interview plan** for the onboarding (Goal 3).
+
+We do not review code. Keep the video a quick overview — the detailed walkthrough of your
 decisions happens live in the next interview. Full details in the
 [README](../README.md#6-submitting).
 
@@ -93,6 +97,27 @@ free to replace it entirely.
 
 ---
 
+## Goal 3 — Plan a customer interview for your onboarding
+
+You've built the onboarding prototype (Goal 2). Before a team invests in building it for real,
+you'd want to put it in front of an actual customer — a developer at a platform who would
+integrate TaxRate — and learn whether it works.
+
+**Deliverable:** a **one-page** plan for that interview, with two parts:
+
+1. **The goal** — what you want to learn or decide from the conversation. What would tell you the
+   onboarding is on the right track, and what would tell you to change course?
+2. **The questions** — the questions you plan to ask (a handful is plenty).
+
+**Worth considering:** who the right person to talk to is, how you'd get them to actually *use*
+the prototype rather than just react to a description, and how to ask about real behavior without
+leading them to the answer you want to hear.
+
+Keep it to a single page — this is about asking the right questions, not writing a formal
+research plan. Submit it alongside your video (see the [README](../README.md#6-submitting)).
+
+---
+
 ## What we're evaluating
 
 | We look for | What that means here |
@@ -100,12 +125,16 @@ free to replace it entirely.
 | **Product judgment** | Sensible tier boundaries; an onboarding path that respects a developer's time. |
 | **Scoping** | You did the *right* 2–3 hours of work, not the most. |
 | **User empathy** | You designed for the developer integrating this API, not for yourself. |
-| **Driving AI** | You got your coding agent to build what you intended, and caught it when it drifted. |
+| **Driving AI** | You direct the agent with your own product intent and judgment — not "build me onboarding" and ship whatever comes back. |
 | **Communication** | Your demo makes the "why" obvious and is honest about tradeoffs. |
+| **Customer discovery** | Your interview plan has a clear goal and asks non-leading questions that would actually reveal whether onboarding works. |
 
-Since your coding tool runs through our gateway, we can see your AI session (the prompts you
-write and how you steer the agent) and we review it as part of the **Driving AI** dimension
-above. Just work the way you normally would.
+**On using AI — please read.** Because your tool runs through our gateway, we see your whole
+session: the prompts you write and how you steer the agent. Lean on AI heavily — that is the
+point of this exercise. But we are evaluating *your* thinking, not the agent's. We want to see
+your product judgment, your opinions, and your taste in how you direct it and in what you keep,
+cut, or rework. Handing the assignment to AI with little input of your own and accepting whatever
+it returns is a **failure**, even if the resulting prototype looks fine.
 
 ## What we are NOT evaluating
 
