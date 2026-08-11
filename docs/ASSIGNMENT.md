@@ -2,7 +2,7 @@
 
 **Role:** Product Manager, API & Platform
 **Timebox:** ~2–3 hours
-**Tools:** This repo + an agentic coding tool of your choice (see the [README](../README.md) for setup)
+**Tools:** This repo + an agentic coding tool — we recommend Claude Code (see the [README](../README.md) for setup)
 
 You've inherited **TaxRate**, a sales tax API for platforms, with a marketing site, docs,
 pricing, and a dashboard. It works. Your job is to prototype two product improvements, then plan

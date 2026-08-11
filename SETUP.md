@@ -3,9 +3,13 @@
 This gets the TaxRate app running on your computer, step by step. It takes about two minutes.
 No prior Node.js experience needed — just follow along in order.
 
-> **In a hurry, or not comfortable in a terminal?** Once your AI coding tool is connected to
-> the gateway (see [README §2](README.md#2-point-your-coding-tool-at-our-gateway)), you can hand
-> this whole thing off — see [Let your AI tool do it](#let-your-ai-tool-do-it) at the bottom.
+> **These steps assume [Claude Code](https://docs.claude.com/en/docs/claude-code)**, our
+> recommended tool. The `npm` commands are identical for any tool; only the AI-assisted shortcut
+> below is Claude Code-specific.
+>
+> **In a hurry, or not comfortable in a terminal?** Once Claude Code is connected to the gateway
+> (see [README §2](README.md#2-point-claude-code-at-our-gateway)), you can hand this whole thing
+> off — see [Let Claude Code do it](#let-claude-code-do-it) at the bottom.
 
 ---
 
@@ -110,13 +114,14 @@ Still stuck? Setup problems don't count against you — email your hiring contac
 
 ---
 
-## Let your AI tool do it
+## Let Claude Code do it
 
-Once your coding tool is pointed at the gateway
-([README §2](README.md#2-point-your-coding-tool-at-our-gateway)), you can just ask it to run
-this guide for you. For example:
+Once Claude Code is pointed at the gateway
+([README §2](README.md#2-point-claude-code-at-our-gateway)), you can just ask it to run this
+guide for you. For example:
 
 > Read `SETUP.md` and follow it to install dependencies and start the app, then tell me the
 > local URL and confirm it's working.
 
-It will run the steps above and report back.
+It will run the steps above and report back. (Other tools that can run shell commands work the
+same way — the prompt is identical.)
